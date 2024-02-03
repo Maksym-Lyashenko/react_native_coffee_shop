@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-  ImageProps,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 import HeaderBar from '../components/HeaderBar';
 import EmptyListAnimation from '../components/Details Scerren/EmptyListAnimation';
-import CartItem from '../components/Cart Screen/CartItem';
+import CartItems from '../components/Cart Screen/CartItems';
 import PaymentFooter from '../components/PaymentFooter';
 
 import {useStore} from '../store/store';
@@ -42,7 +35,7 @@ const CartScreen: React.FC<ICartScreen> = ({navigation}) => {
   const tabBarHeight = useBottomTabBarHeight();
 
   const buttonHandler = () => {
-    navigation.navigate('PaymentScreen', {});
+    navigation.navigate('PaymentScreen', {amount: CartPrice});
   };
 
   const incrementCartItemQuantityHandler = (id: string, size: string) => {
@@ -77,7 +70,7 @@ const CartScreen: React.FC<ICartScreen> = ({navigation}) => {
                         type: item.type,
                       });
                     }}>
-                    <CartItem
+                    <CartItems
                       id={item.id}
                       name={item.name}
                       imagelink_square={item.imagelink_square}
@@ -101,7 +94,7 @@ const CartScreen: React.FC<ICartScreen> = ({navigation}) => {
             <PaymentFooter
               buttonHandler={buttonHandler}
               buttonTitle="Pay"
-              price={{price: CartPrice, currency: '&'}}
+              price={{price: CartPrice, currency: '$'}}
             />
           )}
         </View>

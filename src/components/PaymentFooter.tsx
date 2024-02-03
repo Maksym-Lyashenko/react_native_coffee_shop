@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
 import {adaptive} from '../utils/adaptive';
+
 import {
   BORDERRADIUS,
   COLORS,
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
 
   priceContainer: {
     alignItems: 'center',
-    width: 150,
+    width: 120,
   },
 
   priceTitle: {

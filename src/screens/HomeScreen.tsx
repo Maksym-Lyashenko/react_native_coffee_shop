@@ -19,9 +19,9 @@ import {useStore} from '../store/store';
 import {adaptive} from '../utils/adaptive';
 import {COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
 
-import {CoffeeListT, TCartItem} from '../types/types';
+import {TDataList, TCartItem} from '../types/types';
 
-const getCategoriesFromData = (data: CoffeeListT) => {
+const getCategoriesFromData = (data: TDataList[]) => {
   let temp: {[key: string]: number} = {};
   for (let i = 0; i < data.length; i++) {
     if (temp[data[i].name] == null) {
@@ -35,7 +35,7 @@ const getCategoriesFromData = (data: CoffeeListT) => {
   return categories;
 };
 
-const getCoffeeList = (category: string, data: CoffeeListT) => {
+const getCoffeeList = (category: string, data: TDataList[]) => {
   if (category == 'All') {
     return data;
   } else {
@@ -91,7 +91,6 @@ const HomeScreen = () => {
     special_ingredient,
     type,
     prices,
-    ItemPrice,
   }: TCartItem) => {
     addToCart({
       id,
@@ -102,7 +101,6 @@ const HomeScreen = () => {
       special_ingredient,
       type,
       prices,
-      ItemPrice,
     });
     calculateCartPrice();
     ToastAndroid.showWithGravity(

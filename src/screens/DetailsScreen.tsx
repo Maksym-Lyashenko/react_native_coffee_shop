@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageProps, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useStore} from '../store/store';
 import {COLORS} from '../theme/theme';
 import ImageBGInfo from '../components/ImageBGInfo';
@@ -16,25 +16,18 @@ interface IDetailsScreen {
   navigation: Nav;
   goBack: () => void;
   route: {
-    key: string;
-    name: string;
+    // key: string;
+    // name: string;
     params: {
       id: string;
       index: number;
       type: string;
     };
-    path: undefined;
+    // path: undefined;
   };
 }
 
-interface ICartItem {
-  id: string;
-  index: number;
-  name: string;
-  roasted: string;
-  imagelink_square: ImageProps;
-  special_ingredient: string;
-  type: string;
+interface ICartItem extends Omit<TCartItem, 'prices'> {
   price: {
     size: string;
     price: string;
@@ -80,7 +73,6 @@ const DetailsScreen: React.FC<IDetailsScreen> = ({navigation, route}) => {
       special_ingredient,
       type,
       prices: [{...price, quantity: 1}],
-      ItemPrice: '',
     });
     calculateCartPrice();
     navigation.navigate('CartScreen');

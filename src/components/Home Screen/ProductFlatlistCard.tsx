@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Dimensions,
   ImageBackground,
-  ImageProps,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -26,20 +25,13 @@ import {TCartItem} from '../../types/types';
 
 const CARD_WIDTH = Dimensions.get('window').width * 0.32;
 
-interface ProductFlatlistCardI {
-  id: string;
-  name: string;
-  roasted: string;
-  imagelink_square: ImageProps;
-  special_ingredient: string;
+interface ProductFlatlistCardI extends Omit<TCartItem, 'prices'> {
   price: {
     size: string;
     price: string;
     currency: string;
   };
   average_rating: number;
-  type: string;
-  index: number;
   buttonPressHandler: ({
     id,
     index,

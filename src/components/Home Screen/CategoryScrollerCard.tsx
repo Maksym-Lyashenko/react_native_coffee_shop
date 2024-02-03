@@ -1,5 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+
 import {
   BORDERRADIUS,
   COLORS,
@@ -7,20 +8,21 @@ import {
   FONTSIZE,
   SPACING,
 } from '../../theme/theme';
+
 import {adaptive} from '../../utils/adaptive';
-import {CoffeeListT} from '../../types/types';
+import {TDataList} from '../../types/types';
 import {useStore} from '../../store/store';
 
 interface CategoryScrollerI {
   categoryIndex: {
     index: number;
   };
-  data: any;
+  data: string;
   index: number;
   categories: string[];
   setCategoryIndex: (data: {index: number; category: string}) => void;
-  setSortedCoffee: React.Dispatch<React.SetStateAction<CoffeeListT>>;
-  getCoffeeList: (category: string, data: CoffeeListT) => CoffeeListT;
+  setSortedCoffee: React.Dispatch<React.SetStateAction<TDataList[]>>;
+  getCoffeeList: (category: string, data: TDataList[]) => TDataList[];
   ListRef: React.RefObject<FlatList<any>>;
 }
 

@@ -1,15 +1,15 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ImageProps, StyleSheet, Text, View} from 'react-native';
 
 import ProductFlatlistCard from './ProductFlatlistCard';
 
-import {BeanListT, CoffeeListT, TCartItem} from '../../types/types';
+import {TCartItem, TDataList} from '../../types/types';
 import {SPACING} from '../../theme/theme';
 import {adaptive} from '../../utils/adaptive';
 import EmptyFlatListComponent from './EmptyFlatListComponent';
 
 interface ProductFlatlistI {
-  data: CoffeeListT | BeanListT;
+  data: TDataList[];
   ListRef?: React.RefObject<FlatList<any>>;
   coffeeCardAddToCart: ({
     id,

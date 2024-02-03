@@ -5,18 +5,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import CoffeeData from "../data/CoffeeData";
 import BeansData from "../data/BeansData";
-import { BeanListT, CoffeeListT, TCartItem } from "../types/types";
+import { ICartItemWithItemPrice, TCartItem, TDataList, TFavoritesItem, TOrderHistoryList } from "../types/types";
 
 interface IStore {
-    CoffeeList: CoffeeListT,
-    BeanList: BeanListT,
+    CoffeeList: TDataList[],
+    BeanList: TDataList[],
     CartPrice: number,
-    FavoritesList: [],
+    FavoritesList: TFavoritesItem[],
     CartList: TCartItem[],
-    OrderHistoryList: [],
+    OrderHistoryList: TOrderHistoryList[],
     addToCart: (cartItem: TCartItem) => void,
     calculateCartPrice:() => void,
     addToFavoriteList: (type: string, id: string) => void,
+    addToOrderHistoryListFromCart: () => void;
     deleteFromFavoriteList: (type: string, id: string) => void,
     incrementCartItemQuantity: (id: string, size: string) => void,
     decrementCartItemQuantity: (id: string, size: string) => void,
@@ -167,18 +168,18 @@ export const useStore = create<IStore>()(
             })),
 
             addToOrderHistoryListFromCart: () => set(produce(state => {
-                let temp = state.Cartlist.reduce(
-                    (accumulator: number, currentValue: TCartItem) => 
+                let temp = state.CartList.reduce(
+                    (accumulator: number, currentValue: ICartItemWithItemPrice) => 
                     accumulator + parseFloat(currentValue.ItemPrice), 0);
                     if (state.OrderHistoryList.length > 0) {
                         state.OrderHistoryList.unshift({
-                            OrderDate: new Date().toDateString() + " " + new Date().toTimeString(),
+                            OrderDate: new Date().toDateString() + " " + new Date().toLocaleTimeString(),
                             CartList: state.CartList,
                             CartListPrice: temp.toFixed(2).toString(),
                         });
                     } else {
                         state.OrderHistoryList.push({
-                            OrderDate: new Date().toDateString() + " " + new Date().toTimeString(),
+                            OrderDate: new Date().toDateString() + " " + new Date().toLocaleTimeString(),
                             CartList: state.CartList,
                             CartListPrice: temp.toFixed(2).toString(),
                         });

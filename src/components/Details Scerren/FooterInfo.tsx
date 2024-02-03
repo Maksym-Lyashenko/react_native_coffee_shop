@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {
-  ImageProps,
   StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {CoffeeListT} from '../../types/types';
+
 import {adaptive} from '../../utils/adaptive';
+
 import {
   BORDERRADIUS,
   COLORS,
@@ -16,28 +16,10 @@ import {
   FONTSIZE,
   SPACING,
 } from '../../theme/theme';
+import {TDataList} from '../../types/types';
 
 interface IFooterInfo {
-  itemOfIndex: {
-    id: string;
-    name: string;
-    description: string;
-    roasted: string;
-    imagelink_square: ImageProps;
-    imagelink_portrait: ImageProps;
-    ingredients: string;
-    special_ingredient: string;
-    prices: {
-      size: string;
-      price: string;
-      currency: string;
-    }[];
-    average_rating: number;
-    ratings_count: string;
-    favourite: boolean;
-    type: string;
-    index: number;
-  };
+  itemOfIndex: TDataList;
   price: {
     size: string;
     price: string;
